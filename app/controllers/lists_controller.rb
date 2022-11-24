@@ -1,4 +1,6 @@
 class ListsController < ApplicationController
+  before_action :set_restaurant, only: %i[show]
+
   # A user can see all the lists
   # GET "lists"
   def index
@@ -15,6 +17,10 @@ class ListsController < ApplicationController
   # GET "lists/new"
   # POST "lists"
   def new
+    @list = List.new
+  end
+
+  def create
     @list = List.new(lists_params)
 
     if @list.save
@@ -24,11 +30,11 @@ class ListsController < ApplicationController
     end
   end
 
-  def create
-    @list = List.new
-  end
-
   private
+
+  def set_list
+    @list = List.find(params[:id])
+  end
 
   def lists_params
     params.require(:list).permit(:name)

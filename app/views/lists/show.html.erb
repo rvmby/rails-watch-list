@@ -8,14 +8,14 @@
   <div class="row mt-5">
     <% @list.movies.each do |movie| %>
       <div class="col-4">
-        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= movie.image_url %>')">
-          <%= movie.name %>
-          <%= link_to "+", movie_path(movie), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "card-remove-link" %>
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3))">
+          <%= movie.title %>
           <div class="card-tags">
-          <% list.bookmarks.each do |bookmark| %>
-            <span><%= bookmark.id %></span>
+          <% @list.bookmarks.each do |bookmark| %>
+          <%= link_to "delete", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "card-remove-link" %>
+            <span><%= bookmark.comment %></span>
           <% end %>
-          <%= link_to "+", new_movie_movie_bookmark_path(movie) %>
+          <%= link_to "+", new_list_bookmark_path(@list) %>
         </div>
         </div>
       </div>
@@ -23,10 +23,10 @@
   </div>
   <div class="row my-5 justify-content-center">
     <div class="col-4">
-      <h4>Add a list</h4>
-      <%= simple_form_for [@list, @movie] do |f| %>x
-        <%= f.input :name, placeholder: "Movie name" %>
-        <%= f.input :image_url, placeholder: "https://some_nice_image_found_on_google.jpg" %>
+      <h4>Add a bookmark</h4>
+      <%= simple_form_for [@list, @bookmark] do |f| %>x
+        <%= f.input :comment, placeholder: "Bookmark comment" %>
+        <%= f.association :movie, placeholder: "select a movie" %>
         <%= f.submit "Add", class: "btn btn-primary" %>
       <% end %>
     </div>

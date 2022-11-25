@@ -10,6 +10,7 @@ class ListsController < ApplicationController
   # GET lists/42
   def show
     @list = List.find(params['id'])
+    @bookmark = Bookmark.new
   end
 
   # A user can create a new list

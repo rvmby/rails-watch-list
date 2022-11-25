@@ -1,10 +1,11 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12 col-md-8">
-      <h1>Create your bookmark here</h1>
+      <h1>Add a movie to your <%= @list.name %> list</h1>
       <%= simple_form_for [@list, @bookmark] do |f| %>
-        <%= f.association :bookmark  %>
-        <%= f.submit %>
+         <%= f.input :comment, placeholder: 'Enter a comment about the movie' %>
+          <%= f.association :movie, prompt: "Select a movie", input_html: {data: { controller: "tom-select"}} %>
+          <%= f.submit class: "btn btn-flat" %>
       <% end %>
     </div>
   </div>

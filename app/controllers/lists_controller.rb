@@ -1,6 +1,5 @@
 class ListsController < ApplicationController
-  before_action :set_restaurant, only: %i[show]
-
+  before_action :set_list, only: %i[show]
   # A user can see all the lists
   # GET "lists"
   def index
